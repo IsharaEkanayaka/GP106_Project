@@ -1,0 +1,65 @@
+WindowManager:
+    Dashboard:
+    PianoTilesWindow:
+    TicTacToeWindow:
+    HangmanLiteWindow:
+
+<Dashboard>:
+    name : "dashboard"
+    canvas.before:
+        Rectangle:
+            size : self.size
+            source : "images/bg_d.jpg"
+    BoxLayout:
+        orientation : "vertical"
+        Label:
+            font_name : "fonts/Lcd.ttf"
+            text : "DASHBOARD"
+            font_size : "80dp"
+            color : 0,1,0,1
+        BoxLayout:
+            orientation : "horizontal"
+            Button:
+                text : "Tic-Tac-Toe"
+                font_size : "25dp"
+                on_press : app.root.current = "TicTacToeWindow"
+            Button:
+                text : "Hangman-Lite"
+                font_size : "25dp"
+                on_press : app.root.current = "HangmanLiteWindow"
+            Button:
+                text : "Piano-Tiles"
+                font_size : "25dp"
+                on_press : app.root.current = "PianoTilesWindow"
+
+<PianoTilesWindow>:
+    name : "PianoTilesWindow"
+    BoxLayout:
+        orientation : "vertical"
+        Label:
+            font_name : "fonts/Lcd.ttf"
+            text : "PIANO TILES"
+            font_size : "50dp"
+            size_hint : 1,.1
+            color : 0,1,0,1
+        BoxLayout:
+            orientation : "horizontal"
+            Label : 
+                text : "SCORE"
+
+    BoxLayout:
+        Button:
+            text:"start" 
+            on_press : root.play_piano()
+            size_hint : .1,.1
+        Button:
+            text : "Home"
+            on_press : root.stop_piano()
+            on_press : app.root.current = "dashboard"
+            size_hint : .1,.1
+
+<TicTacToeWindow>:
+    name : "TicTacToeWindow"
+
+<HangmanLiteWindow>:
+    name : "HangmanLiteWindow"

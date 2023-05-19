@@ -42,15 +42,21 @@ WindowManager:
             font_size : "50dp"
             size_hint : 1,.1
             color : 0,1,0,1
-        BoxLayout:
-            orientation : "horizontal"
-            Label : 
-                text : "SCORE"
+        GridLayout:
+            cols : 3
+            Widget:
+                canvas:
+                    Color:
+                        rgb : 0,1,0
+                    Line:
+                        circle: (200,200,100)
+            Label:
+                text : "score :" +root.score
 
     BoxLayout:
         Button:
             text:"start" 
-            on_press : root.play_piano()
+            on_press : root.start_game()
             size_hint : .1,.1
         Button:
             text : "Home"

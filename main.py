@@ -5,12 +5,14 @@ from kivy.uix.label import Label
 from kivy.uix.screenmanager import ScreenManager, Screen
 # The Widget class is the base class required for creating Widgets
 from kivy.uix.widget import Widget
+import games.piano_tiles as pt
 
 class Dashboard(Screen):
     pass
 
 
 class PianoTilesWindow(Screen):
+    score = str(pt.score)
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.piano = SoundLoader.load('audio.mp3')
@@ -20,6 +22,11 @@ class PianoTilesWindow(Screen):
             self.piano.play()
 
     def stop_piano(self):
+        self.piano.stop()
+
+    def start_game(self):
+        self.piano.play()
+        pt.start()
         self.piano.stop()
 
 class TicTacToeWindow(Screen):

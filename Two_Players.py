@@ -2,7 +2,7 @@ def play_game():
     from pyfirmata import Arduino,OUTPUT,INPUT,util
     import time
     import sys
-    board = Arduino ("COM8")
+    board = Arduino ("COM6")
 
     # Defining  Arduino Pins
     Row0=5

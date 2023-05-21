@@ -22,28 +22,33 @@ WindowManager:
             color : 0,1,0,1
         BoxLayout:
             orientation : "horizontal"
+            spacing:"2dp"
             Button:
                 text : "Tic-Tac-Toe"
                 font_size : "25dp"
                 on_press : app.root.current = "TicTacToeWindow"
+                size_hint: .5,.3
             Button:
                 text : "Hangman-Lite"
                 font_size : "25dp"
                 on_press : app.root.current = "HangmanLiteWindow"
+                size_hint: .5,.3
             Button:
                 text : "Piano-Tiles"
                 font_size : "25dp"
                 on_press : app.root.current = "PianoTilesWindow"
+                size_hint: .5,.3
 
 <PianoTilesWindow>:
     name : "PianoTilesWindow"
     canvas.before:
         Rectangle:
             size : self.size
-            source : "images/bg_d.jpg"
+            source : "images/ttt.jpg"
     BoxLayout:
         orientation : "vertical"
         Label:
+            id:pt_label
             font_name : "fonts/Lcd.ttf"
             text : "PIANO TILES"
             font_size : "50dp"
@@ -52,11 +57,43 @@ WindowManager:
         BoxLayout:
             orientation : "horizontal"
             Label:
+                text : "Total number played"
+                font_size : "25dp"
+            Label:
+                id : _TotalNo
+                font_size : "25dp"
+
+        BoxLayout:
+            orientation : "horizontal"
+            Label:
+                text : "Total time"
+                font_size : "25dp"
+            Label:
+                id : _TotalTime
+                font_size : "25dp"
+
+        BoxLayout:
+            orientation : "horizontal"
+            Label:
+                font_name : "fonts/Lcd.ttf"
+                text : "---- HIGHEST SCORE ----"
+                font_size : "30dp"
+                color : 1,1,0,1
+        BoxLayout:
+            orientation : "horizontal"
+            Label:
+                text : "Name"
+                font_size : "25dp"
+            Label:
+                id : _highestName
+                font_size : "25dp"
+        BoxLayout:
+            orientation : "horizontal"
+            Label:
                 text : "Highest Score"
                 font_size : "25dp"
             Label:
                 id : _highestMarks
-                text : root.pre_name
                 font_size : "25dp"
 
         BoxLayout:
@@ -132,7 +169,7 @@ WindowManager:
             id:my_label
             font_name: "fonts/Lcd.ttf"
             text: "TIC-TAC-TOE"
-            font_size: "85dp"
+            font_size: "50dp"
             size_hint: 1, 0.2
 
             pos_hint: {"top": 1}
@@ -306,7 +343,7 @@ WindowManager:
                 background_color: 1, 0, 0, 0.2
                 font_size: "30dp"
                 on_release:
-                    app.run_two_players()
+                    root.run_two_players()
 
 
 #:set checkboxPivot_x -0.45
@@ -314,6 +351,12 @@ WindowManager:
 
 <HangmanLiteWindow>:
     name : "HangmanLiteWindow"
+
+    Label:
+        font_name : "fonts/Lcd.ttf"
+        text : "HANGMAN LITE"
+        font_size : "50dp"
+        color : 0,1,0,1
     Button:
         id:button_sq
         text :"Start"
@@ -355,10 +398,12 @@ WindowManager:
                 text : "Home"
                 on_release: app.root.current = "dashboard"
                 font_size : "25dp"
+                size_hint: .5,.2
             Button:
                 text : "Back"
                 on_release: app.root.current = "PianoTilesWindow"
                 font_size : "25dp"
+                size_hint: .5,.2
     
 
 

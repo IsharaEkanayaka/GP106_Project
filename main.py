@@ -20,34 +20,47 @@ from kivy.uix.popup import Popup
 from kivy.properties import ObjectProperty
 from kivy.factory import Factory
 from kivy.uix.button import Button
-import Two_Players
 from single_player_game import SinglePlayerGameWindow
 from kivy.clock import Clock
 from pathlib import Path
 import json
+import time
 
 class Dashboard(Screen):
     pass
 
 
 class PianoTilesWindow(Screen):
+    label_color = ListProperty([0, 0, 1, 1])  # Initial label color
+    def on_enter(self):
+        Clock.schedule_interval(self.change_label_color, 1)
+    def on_leave(self):
+        Clock.unschedule(self.change_label_color)
+    def change_label_color(self, dt):
+        if self.label_color == [0, 0, 1, 1]:  # Blue to green
+            self.label_color = [0, 1, 0, 1]
+        elif self.label_color == [0, 1, 0, 1]:  # Green to red
+            self.label_color = [1, 0, 0, 1]
+        else:  # Red to blue
+            self.label_color = [0, 0, 1, 1]
+        label = self.ids.pt_label
+        animation = Animation(color=self.label_color, duration=0.2)
+        animation.start(label)
+
     with open(Path("games/PianoTiles/save_data/piano_tiles.json"),"r") as data:
         marks = json.load(data)
     score = str(pt.score)
     pre_name = marks[-1]['name']
     pre_score = marks[-1]['score']
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.piano = SoundLoader.load('audio.mp3')
-        self.highest_marks()
-    def play_piano(self):
-        if self.piano:
-            self.piano.play()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.piano = SoundLoader.load('audio.mp3')
+
+    def play_piano(self):
+        if self.piano:
+            self.piano.play()
 
     def stop_piano(self):
         self.piano.stop()
@@ -62,7 +75,16 @@ class PianoTilesWindow(Screen):
         self.ids._preName.text = pre_name
         self.ids._preScore.text = str(pre_score)
         self.highest_marks()
+        t1 = time.time()
         pt.start()
+        t2 = time.time()
+        T = (t2 - t1)/60
+        with open(Path("games/PianoTiles/save_data/time.txt"),"r") as file:
+            T_Time = float(file.read())
+        T_Time += T
+        with open(Path("games/PianoTiles/save_data/time.txt"),"w") as file:
+            file.write(str(T_Time))
+        self.time_played()
         self.score = pt.score
         self.save()
         self.piano.stop()
@@ -80,14 +102,24 @@ class PianoTilesWindow(Screen):
             marks.append(new_score)
             json.dump(marks,f)
 
+    def time_played(self):
+        with open(Path("games/PianoTiles/save_data/time.txt"),"r") as file:
+            self.t_time = round(float(file.read()),2)
+        self.ids._TotalTime.text = str(self.t_time) +" " "minutes"
+
+
     def highest_marks(self):
         with open(Path("games/PianoTiles/save_data/piano_tiles.json"),"r") as data:
             marks = json.load(data)
-        L = []
+        m = 0
         for i in marks:
-            L.append(int(i["score"]))
-        highestScore = max(L)
-        self.ids._highestMarks.text = str(highestScore )
+            if m < i['score']:
+                m = i['score']
+                self.high_name = i['name']
+        self.ids._highestMarks.text = str(m) 
+        self.ids._TotalNo.text = str(len(marks) )
+        self.ids._highestName.text = self.high_name
+
 
 
 class TicTacToeWindow(Screen):
@@ -150,6 +182,8 @@ class HangmanLiteWindow(Screen):
             self.add_widget(imagea)
             
 class TwoPlayersGameWindow(Screen):
+  def __init__(self, **kwargs):
+        super().__init__(**kwargs)
   def run_two_players(self):
         import Two_Players
         Two_Players.play_game()

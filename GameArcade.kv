@@ -5,6 +5,7 @@ WindowManager:
     HangmanLiteWindow:
     SinglePlayerGameWindow:
     TwoPlayersGameWindow:
+    GameOverWindow:
 
 <Dashboard>:
     name : "dashboard"
@@ -339,6 +340,27 @@ WindowManager:
         pos_hint:{"x":0.7,"y":0.0}
         values:["easy","medium","hard"]
         on_text:root.Diff_set(diff_id.text)
+
+<GameOverWindow>:
+    name : "GameOverWindow"
+    
+    BoxLayout:
+        orientation : "vertical"
+        Image:
+            source : "images/game_over.png"
+
+        BoxLayout:
+            orientation : "horizontal"
+            Button:
+                text : "Home"
+                on_release: app.root.current = "dashboard"
+                font_size : "25dp"
+            Button:
+                text : "Back"
+                on_release: app.root.current = "PianoTilesWindow"
+                font_size : "25dp"
+    
+
 
 
 

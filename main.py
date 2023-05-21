@@ -66,6 +66,7 @@ class PianoTilesWindow(Screen):
         self.score = pt.score
         self.save()
         self.piano.stop()
+        self.manager.current = 'GameOverWindow'
 
     def on_text_validate(self,widget):
         self.text_input_str = widget.text
@@ -152,6 +153,9 @@ class TwoPlayersGameWindow(Screen):
   def run_two_players(self):
         import Two_Players
         Two_Players.play_game()
+
+class GameOverWindow(Screen):
+    pass
 
 class WindowManager(ScreenManager):
     single_player_game = ObjectProperty(None)  # Add this line

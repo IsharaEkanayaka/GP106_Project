@@ -5,6 +5,10 @@
 from pyfirmata import Arduino,OUTPUT,util,INPUT
 import time
 import random
+from pathlib import Path
+import json
+
+
 score = 0
 #setup configurations
 from games import Config
@@ -23,6 +27,10 @@ def decide():
     X = [0,1,2]
     p = random.choices(X)[0]
     R1 = p
+
+def temp():
+    print(score)
+    
 def turn_off():
     Config.board.digital[2].write(0)
     Config.board.digital[3].write(0)
@@ -100,15 +108,28 @@ def turn(a):
         Config.board.digital[6].write(0)
         Config.board.digital[7].write(1)
     elif a==8:
+<<<<<<< HEAD
         Config.board.digital[2].write(0)
         Config.board.digital[3].write(0)
         Config.board.digital[4].write(1)
         Config.board.digital[5].write(1)
         Config.board.digital[6].write(1)
         Config.board.digital[7].write(0)
+=======
+        board.digital[2].write(0)
+        board.digital[3].write(0)
+        board.digital[4].write(1)
+        board.digital[5].write(1)
+        board.digital[6].write(1)
+        board.digital[7].write(0)
+z = 0
+>>>>>>> 24760843b00a3136b75de261f32a9b6efc225be7
 def start():
-    global score
+    global score,z
     global R1,R2,R3
+    if z == 1:
+        score = 0
+    z = 1
     while True:
         i = 0
         if score < 5:
@@ -160,6 +181,7 @@ def start():
                 timer2 = time.time()
             turn_off()
             score = score + i
+            temp()
             if c == 1:
                 print("Game over")
                 print("score",score)
@@ -222,6 +244,7 @@ def start():
                 turn_off()
                 timer2 = time.time()
             score = score + i
+            temp()
             if c == 1:
                 print("Game over")
                 print("score",score)

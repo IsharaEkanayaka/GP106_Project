@@ -76,7 +76,8 @@ WindowManager:
 <HangmanLiteWindow>:
     name : "HangmanLiteWindow"
     Button:
-        text : 'Start'
+        id:button_sq
+        text :button_sqT
         size_hint:0.3,0.15
         pos_hint:{"x":0.0,"y":0.0}
         on_press:root.game_init()
@@ -101,7 +102,7 @@ WindowManager:
         values:["easy","medium","hard"]
         on_text:root.Diff_set(diff_id.text)
 
-    
+
 
 
 

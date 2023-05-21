@@ -1,4 +1,5 @@
 from kivy.app import App
+from kivy.properties import StringProperty
 from kivy.uix.checkbox import CheckBox
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.image import Image
@@ -43,8 +44,9 @@ class HangmanLiteWindow(Screen):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-
+    button_sqT=StringProperty("Start")
     difficulty=1
+    loop_state=0#1-continue,0-finished
 
     def Diff_set(self,value):
         self.ids.diff_id.text=value
@@ -56,9 +58,12 @@ class HangmanLiteWindow(Screen):
         if value == "hard":
             self.difficulty = 3
     def game_init(self):
-        hm=HM.HangMan(self.difficulty)
-        print("object created :",self.difficulty)
-        print(hm.m_word)
+        if(self.button_sqT=="Start" and self.loop_state==0):
+            hm=HM.HangMan(self.difficulty)
+            self.loop_state=1
+            self.button_sqT="Quit"
+            print("object created :",self.difficulty)
+            print(hm.m_word)
 
 
 class WindowManager(ScreenManager):

@@ -10,42 +10,35 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.widget import Widget
 from kivy.properties import StringProperty
 from kivy.uix.image import Image
-import games.piano_tiles as pt
-#<<<<<<< HEAD
+import games.PianoTiles.piano_tiles as pt
 from games.Hangman import HM
 
-#=======
 from kivy.clock import Clock
 from pathlib import Path
 import json
-#>>>>>>> 24760843b00a3136b75de261f32a9b6efc225be7
 
 class Dashboard(Screen):
     pass
 
 
 class PianoTilesWindow(Screen):
-#<<<<<<< HEAD
+    with open(Path("games/PianoTiles/save_data/piano_tiles.json"),"r") as data:
+        marks = json.load(data)
     score = str(pt.score)
+    pre_name = marks[-1]['name']
+    pre_score = marks[-1]['score']
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.piano = SoundLoader.load('audio.mp3')
-
+        self.highest_marks()
     def play_piano(self):
         if self.piano:
             self.piano.play()
-#=======
-    with open(Path("games/save_data/piano_tiles.json"),"r") as data:
-        marks = json.load(data)
-    
-    
-    pre_name = marks[-1]['name']
-    pre_score = marks[-1]['score']
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.piano = SoundLoader.load('audio.mp3')
-#>>>>>>> 24760843b00a3136b75de261f32a9b6efc225be7
 
     def stop_piano(self):
         self.piano.stop()
@@ -53,7 +46,7 @@ class PianoTilesWindow(Screen):
     def start_game(self):
         global pre_name,pre_score
         self.piano.play()
-        with open(Path("games/save_data/piano_tiles.json"),"r") as data:
+        with open(Path("games/PianoTiles/save_data/piano_tiles.json"),"r") as data:
             marks = json.load(data)
         pre_name = marks[-1]['name']
         pre_score = marks[-1]['score']
@@ -65,22 +58,20 @@ class PianoTilesWindow(Screen):
         self.save()
         self.piano.stop()
 
-#<<<<<<< HEAD
-#=======
     def on_text_validate(self,widget):
         self.text_input_str = widget.text
         print(self.text_input_str)
 
     def save(self):
         new_score = {'name':self.text_input_str,'score':self.score}
-        with open(Path("games/save_data/piano_tiles.json"),"r") as data:
+        with open(Path("games/PianoTiles/save_data/piano_tiles.json"),"r") as data:
             marks = json.load(data)
-        with open(Path("games/save_data/piano_tiles.json"),"w") as f:
+        with open(Path("games/PianoTiles/save_data/piano_tiles.json"),"w") as f:
             marks.append(new_score)
             json.dump(marks,f)
 
     def highest_marks(self):
-        with open(Path("games/save_data/piano_tiles.json"),"r") as data:
+        with open(Path("games/PianoTiles/save_data/piano_tiles.json"),"r") as data:
             marks = json.load(data)
         L = []
         for i in marks:
@@ -88,8 +79,6 @@ class PianoTilesWindow(Screen):
         highestScore = max(L)
         self.ids._highestMarks.text = str(highestScore )
 
-    
-#>>>>>>> 24760843b00a3136b75de261f32a9b6efc225be7
 
 class TicTacToeWindow(Screen):
     pass

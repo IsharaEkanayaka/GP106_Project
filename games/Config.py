@@ -1,7 +1,7 @@
 from pyfirmata import Arduino, OUTPUT
 from pyfirmata import Arduino, util, INPUT
 
-board=Arduino("COM3")
+board=Arduino("COM8")
 button1 = board.digital[8]
 button2 = board.digital[9]
 button3 = board.digital[10]

@@ -108,22 +108,22 @@ def turn(a):
         Config.board.digital[6].write(0)
         Config.board.digital[7].write(1)
     elif a==8:
-<<<<<<< HEAD
+#<<<<<<< HEAD
         Config.board.digital[2].write(0)
         Config.board.digital[3].write(0)
         Config.board.digital[4].write(1)
         Config.board.digital[5].write(1)
         Config.board.digital[6].write(1)
         Config.board.digital[7].write(0)
-=======
-        board.digital[2].write(0)
-        board.digital[3].write(0)
-        board.digital[4].write(1)
-        board.digital[5].write(1)
-        board.digital[6].write(1)
-        board.digital[7].write(0)
+#=======
+        Config.board.digital[2].write(0)
+        Config.board.digital[3].write(0)
+        Config.board.digital[4].write(1)
+        Config.board.digital[5].write(1)
+        Config.board.digital[6].write(1)
+        Config.board.digital[7].write(0)
 z = 0
->>>>>>> 24760843b00a3136b75de261f32a9b6efc225be7
+#>>>>>>> 24760843b00a3136b75de261f32a9b6efc225be7
 def start():
     global score,z
     global R1,R2,R3

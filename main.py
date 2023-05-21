@@ -9,22 +9,23 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 # The Widget class is the base class required for creating Widgets
 from kivy.uix.widget import Widget
 from kivy.properties import StringProperty
+from kivy.uix.image import Image
 import games.piano_tiles as pt
-<<<<<<< HEAD
+#<<<<<<< HEAD
 from games.Hangman import HM
 
-=======
+#=======
 from kivy.clock import Clock
 from pathlib import Path
 import json
->>>>>>> 24760843b00a3136b75de261f32a9b6efc225be7
+#>>>>>>> 24760843b00a3136b75de261f32a9b6efc225be7
 
 class Dashboard(Screen):
     pass
 
 
 class PianoTilesWindow(Screen):
-<<<<<<< HEAD
+#<<<<<<< HEAD
     score = str(pt.score)
 
     def __init__(self, **kwargs):
@@ -34,7 +35,7 @@ class PianoTilesWindow(Screen):
     def play_piano(self):
         if self.piano:
             self.piano.play()
-=======
+#=======
     with open(Path("games/save_data/piano_tiles.json"),"r") as data:
         marks = json.load(data)
     
@@ -44,7 +45,7 @@ class PianoTilesWindow(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.piano = SoundLoader.load('audio.mp3')
->>>>>>> 24760843b00a3136b75de261f32a9b6efc225be7
+#>>>>>>> 24760843b00a3136b75de261f32a9b6efc225be7
 
     def stop_piano(self):
         self.piano.stop()
@@ -64,8 +65,8 @@ class PianoTilesWindow(Screen):
         self.save()
         self.piano.stop()
 
-<<<<<<< HEAD
-=======
+#<<<<<<< HEAD
+#=======
     def on_text_validate(self,widget):
         self.text_input_str = widget.text
         print(self.text_input_str)
@@ -88,7 +89,7 @@ class PianoTilesWindow(Screen):
         self.ids._highestMarks.text = str(highestScore )
 
     
->>>>>>> 24760843b00a3136b75de261f32a9b6efc225be7
+#>>>>>>> 24760843b00a3136b75de261f32a9b6efc225be7
 
 class TicTacToeWindow(Screen):
     pass
@@ -98,9 +99,13 @@ class HangmanLiteWindow(Screen):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+
     button_sqT=StringProperty("Start")
-    difficulty=1
+    difficulty=3
+    hm = HM.HangMan(difficulty)
     loop_state=0#1-continue,0-finished
+
 
     def Diff_set(self,value):
         self.ids.diff_id.text=value
@@ -111,15 +116,21 @@ class HangmanLiteWindow(Screen):
 
         if value == "hard":
             self.difficulty = 3
-    def game_init(self):
+    def Start_clicked(self):
         if(self.button_sqT=="Start" and self.loop_state==0):
-            hm=HM.HangMan(self.difficulty)
+            self.create_Box()
             self.loop_state=1
             self.button_sqT="Quit"
-            print("object created :",self.difficulty)
-            print(hm.m_word)
+            self.ids.button_sq.text="Quit"
+        else:
+            self.loop_state = 0
+            self.button_sqT = "Start"
+            self.ids.button_sq.text = "Start"
 
-
+    def create_Box(self):
+        for i in range(0,len(self.hm.m_word)):
+            imagea=Image(source='images/square3.png',allow_stretch=True,keep_ratio=False,size_hint=(0.15,0.2),pos_hint={'x':((1-(len(self.hm.m_word)*0.15))/2)+0.15*i,'y':0.4})
+            self.add_widget(imagea)
 class WindowManager(ScreenManager):
     pass
 

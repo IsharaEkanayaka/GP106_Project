@@ -7,6 +7,8 @@
     <list default="true" id="75941c02-1e3d-448a-8e2e-79b2f2511f0e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameArcade.kv" beforeDir="false" afterPath="$PROJECT_DIR$/GameArcade.kv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/games/piano_tiles.py" beforeDir="false" afterPath="$PROJECT_DIR$/games/piano_tiles.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/square3.webp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

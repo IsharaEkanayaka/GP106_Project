@@ -3,6 +3,8 @@ WindowManager:
     PianoTilesWindow:
     TicTacToeWindow:
     HangmanLiteWindow:
+    SinglePlayerGameWindow:
+    TwoPlayersGameWindow:
 
 <Dashboard>:
     name : "dashboard"
@@ -117,9 +119,193 @@ WindowManager:
     
 
 <TicTacToeWindow>:
-    name : "TicTacToeWindow"
-    Button:
-        text : 'Tic tac'
+    name: "TicTacToeWindow"
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Rectangle:
+                size: self.size
+                source: "images/ttt.jpg"
+
+        Label:
+            id:my_label
+            font_name: "fonts/Lcd.ttf"
+            text: "TIC-TAC-TOE"
+            font_size: "85dp"
+            size_hint: 1, 0.2
+
+            pos_hint: {"top": 1}
+
+        BoxLayout:
+            orientation: "vertical"
+            Button:
+
+                text: "Home"
+                size_hint: None, None
+                size: 200, 100
+                pos_hint: {"center_x": 0.5}
+                background_color: 1, 0, 0, 0.2
+                font_size: "30dp"
+                on_release:
+                    app.root.current = "dashboard"
+
+            Button:
+                text: "Single Player"
+                size_hint: None, None
+                size: 300, 150
+                pos_hint: {"center_x": 0.5}
+                background_color: 0, 0, 1, 0.2
+                font_size: "30dp"
+                on_release:
+                    app.root.current = "SinglePlayerGameWindow"
+
+            Button:
+                text: "Two Players"
+                size_hint: None, None
+                size: 300, 150
+                pos_hint: {"center_x": 0.5}
+                background_color: 0, 0, 2, 0.2
+                font_size: "30dp"
+                on_release:
+                    app.root.current = "TwoPlayersGameWindow"
+
+<SinglePlayerGameWindow>:
+    name: "SinglePlayerGameWindow"
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Rectangle:
+                size: self.size
+                source: "images/ttt.jpg"
+        Label:
+            id:my_label2
+            text: "Single Player Tic-Tac-Toe"
+            color : 0,1,0,1
+            font_name: "fonts/Lcd.ttf"
+            font_size: "40dp"
+            size_hint_y: 0.2
+
+
+        GridLayout:
+            id: grid_layout
+            cols: 3
+            spacing: 10
+            padding: 10
+
+            Button:
+                id: btn1
+                text: ""
+                font_size: "40sp"
+                background_color: 1, 1, 1, 0.5
+                on_release: root.on_button_click(btn1)
+
+            Button:
+                id: btn2
+                text: ""
+                font_size: "40sp"
+                background_color: 1, 1, 1, 0.5
+                on_release: root.on_button_click(btn2)
+
+            Button:
+                id: btn3
+                text: ""
+                font_size: "40sp"
+                background_color: 1, 1, 1, 0.5
+                on_release: root.on_button_click(btn3)
+
+            Button:
+                id: btn4
+                text: ""
+                font_size: "40sp"
+                background_color: 1, 1, 1, 0.5
+                on_release: root.on_button_click(btn4)
+
+            Button:
+                id: btn5
+                text: ""
+                font_size: "40sp"
+                background_color: 1, 1, 1, 0.5
+                on_release: root.on_button_click(btn5)
+
+            Button:
+                id: btn6
+                text: ""
+                font_size: "40sp"
+                background_color: 1, 1, 1, 0.5
+                on_release: root.on_button_click(btn6)
+
+            Button:
+                id: btn7
+                text: ""
+                font_size: "40sp"
+                background_color: 1, 1, 1, 0.5
+                on_release: root.on_button_click(btn7)
+
+            Button:
+                id: btn8
+                text: ""
+                font_size: "40sp"
+                background_color: 1, 1, 1, 0.5
+                on_release: root.on_button_click(btn8)
+
+            Button:
+                id: btn9
+                text: ""
+                font_size: "40sp"
+                background_color: 1, 1, 1, 0.5
+                on_release: root.on_button_click(btn9)
+
+        BoxLayout:
+            size_hint_y: 0.2
+            Button:
+                text: "Restart"
+                font_size: "20sp"
+                background_color: 0.7, 1, 0.11, 0.8
+                on_release: root.restart_game()
+
+            Button:
+                text: "Back to Dashboard"
+                background_color: 0.7, 1, 0.11, 0.8
+                font_size: "20sp"
+                on_release: app.root.current = "dashboard"
+
+<TwoPlayersGameWindow>:
+    name: "TwoPlayersGameWindow"
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Rectangle:
+                size: self.size
+                source: "images/ttt.jpg"
+        Label:
+            id: my_label2
+            text: "Two players Tic-Tac-Toe"
+            color : 0,1,0,1
+            font_name: "fonts/Lcd.ttf"
+            font_size: "40dp"
+            size_hint_y: 0.2
+        BoxLayout:
+            orientation: "vertical"
+            Button:
+
+                text: "Home"
+                size_hint: None, None
+                size: 200, 100
+                pos_hint: {"center_x": 0.5}
+                background_color: 1, 0, 0, 0.2
+                font_size: "30dp"
+                on_release:
+                    app.root.current = "dashboard"
+            Button:
+
+                text: "start"
+                size_hint: None, None
+                size: 200, 100
+                pos_hint: {"center_x": 0.5}
+                background_color: 1, 0, 0, 0.2
+                font_size: "30dp"
+                on_release:
+                    app.run_two_players()
 
 
 #:set checkboxPivot_x -0.45

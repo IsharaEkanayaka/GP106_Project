@@ -69,5 +69,39 @@ WindowManager:
     Button:
         text : 'Tic tac'
 
+
+#:set checkboxPivot_x -0.45
+#:set checkboxPivot_y 0.45
+
 <HangmanLiteWindow>:
     name : "HangmanLiteWindow"
+    Button:
+        text : 'Start'
+        size_hint:0.3,0.15
+        pos_hint:{"x":0.0,"y":0.0}
+        on_press:root.game_init()
+
+    Button:
+        text : 'Home'
+        size_hint:0.3,0.15
+        pos_hint:{"x":0.3,"y":0.0}
+        on_press : app.root.current = "dashboard"
+
+
+    Label:
+        id:difficulty
+        text:"Difficulty"
+        size_hint:0.3,0.15
+        pos_hint:{"x":0.7,"y":0.05}
+    Spinner:
+        id:diff_id
+        text:"easy"
+        size_hint:0.3,0.10
+        pos_hint:{"x":0.7,"y":0.0}
+        values:["easy","medium","hard"]
+        on_text:root.Diff_set(diff_id.text)
+
+    
+
+
+

@@ -7,26 +7,7 @@ import time
 import random
 score = 0
 #setup configurations
-board=Arduino("COM8")
-button1 = board.digital[8]
-button2 = board.digital[9]
-button3 = board.digital[10]
-button1.mode = INPUT
-button2.mode = INPUT
-button3.mode = INPUT
-PIEZO =board.get_pin('d:11:p')
-
-#set led pins as output pins
-board.digital[2].mode = OUTPUT
-board.digital[3].mode = OUTPUT
-board.digital[4].mode = OUTPUT
-board.digital[5].mode = OUTPUT
-board.digital[6].mode = OUTPUT
-board.digital[7].mode = OUTPUT
-
-#start utilization process
-it = util.Iterator(board)
-it.start()
+from games import Config
 
 R1,R2,R3 = 20,20,20
 def row1():
@@ -43,88 +24,88 @@ def decide():
     p = random.choices(X)[0]
     R1 = p
 def turn_off():
-    board.digital[2].write(0)
-    board.digital[3].write(0)
-    board.digital[4].write(0)
-    board.digital[5].write(1)
-    board.digital[6].write(1)
-    board.digital[7].write(1)
+    Config.board.digital[2].write(0)
+    Config.board.digital[3].write(0)
+    Config.board.digital[4].write(0)
+    Config.board.digital[5].write(1)
+    Config.board.digital[6].write(1)
+    Config.board.digital[7].write(1)
 def buzzer(a):
     if a == 0:
-        PIEZO.write(0.1)
-        board.pass_time(0.1)
-        PIEZO.write(0)
+        Config.PIEZO.write(0.1)
+        Config.board.pass_time(0.1)
+        Config.PIEZO.write(0)
     if a == 1:
-        PIEZO.write(1)
-        board.pass_time(0.1)
-        PIEZO.write(0)
+        Config.PIEZO.write(1)
+        Config.board.pass_time(0.1)
+        Config.PIEZO.write(0)
 
 def turn(a):
     if a==0:
-        board.digital[2].write(1)
-        board.digital[3].write(0)
-        board.digital[4].write(0)
-        board.digital[5].write(0)
-        board.digital[6].write(1)
-        board.digital[7].write(1)
+        Config.board.digital[2].write(1)
+        Config.board.digital[3].write(0)
+        Config.board.digital[4].write(0)
+        Config.board.digital[5].write(0)
+        Config.board.digital[6].write(1)
+        Config.board.digital[7].write(1)
 
     elif a==1:
-        board.digital[2].write(1)
-        board.digital[3].write(0)
-        board.digital[4].write(0)
-        board.digital[5].write(1)
-        board.digital[6].write(0)
-        board.digital[7].write(1)
+        Config.board.digital[2].write(1)
+        Config.board.digital[3].write(0)
+        Config.board.digital[4].write(0)
+        Config.board.digital[5].write(1)
+        Config.board.digital[6].write(0)
+        Config.board.digital[7].write(1)
 
     elif a==2:
-        board.digital[2].write(1)
-        board.digital[3].write(0)
-        board.digital[4].write(0)
-        board.digital[5].write(1)
-        board.digital[6].write(1)
-        board.digital[7].write(0)
+        Config.board.digital[2].write(1)
+        Config.board.digital[3].write(0)
+        Config.board.digital[4].write(0)
+        Config.board.digital[5].write(1)
+        Config.board.digital[6].write(1)
+        Config.board.digital[7].write(0)
     elif a==3:
-        board.digital[2].write(0)
-        board.digital[3].write(1)
-        board.digital[4].write(0)
-        board.digital[5].write(0)
-        board.digital[6].write(1)
-        board.digital[7].write(1)
+        Config.board.digital[2].write(0)
+        Config.board.digital[3].write(1)
+        Config.board.digital[4].write(0)
+        Config.board.digital[5].write(0)
+        Config.board.digital[6].write(1)
+        Config.board.digital[7].write(1)
     elif a==4:
-        board.digital[2].write(0)
-        board.digital[3].write(1)
-        board.digital[4].write(0)
-        board.digital[5].write(1)
-        board.digital[6].write(0)
-        board.digital[7].write(1)
+        Config.board.digital[2].write(0)
+        Config.board.digital[3].write(1)
+        Config.board.digital[4].write(0)
+        Config.board.digital[5].write(1)
+        Config.board.digital[6].write(0)
+        Config.board.digital[7].write(1)
     elif a==5:
-        board.digital[2].write(0)
-        board.digital[3].write(1)
-        board.digital[4].write(0)
-        board.digital[5].write(1)
-        board.digital[6].write(1)
-        board.digital[7].write(0)
+        Config.board.digital[2].write(0)
+        Config.board.digital[3].write(1)
+        Config.board.digital[4].write(0)
+        Config.board.digital[5].write(1)
+        Config.board.digital[6].write(1)
+        Config.board.digital[7].write(0)
     elif a==6:
-        board.digital[2].write(0)
-        board.digital[3].write(0)
-        board.digital[4].write(1)
-        board.digital[5].write(0)
-        board.digital[6].write(1)
-        board.digital[7].write(1)
+        Config.board.digital[2].write(0)
+        Config.board.digital[3].write(0)
+        Config.board.digital[4].write(1)
+        Config.board.digital[5].write(0)
+        Config.board.digital[6].write(1)
+        Config.board.digital[7].write(1)
     elif a==7:
-        board.digital[2].write(0)
-        board.digital[3].write(0)
-        board.digital[4].write(1)
-        board.digital[5].write(1)
-        board.digital[6].write(0)
-        board.digital[7].write(1)
+        Config.board.digital[2].write(0)
+        Config.board.digital[3].write(0)
+        Config.board.digital[4].write(1)
+        Config.board.digital[5].write(1)
+        Config.board.digital[6].write(0)
+        Config.board.digital[7].write(1)
     elif a==8:
-        board.digital[2].write(0)
-        board.digital[3].write(0)
-        board.digital[4].write(1)
-        board.digital[5].write(1)
-        board.digital[6].write(1)
-        board.digital[7].write(0)
+        Config.board.digital[2].write(0)
+        Config.board.digital[3].write(0)
+        Config.board.digital[4].write(1)
+        Config.board.digital[5].write(1)
+        Config.board.digital[6].write(1)
+        Config.board.digital[7].write(0)
 def start():
     global score
     global R1,R2,R3
@@ -145,9 +126,9 @@ def start():
             timer1 = time.time()
             timer2 = 5
             while (timer2 - timer1) <= 1:
-                button1_state = button1.read()
-                button2_state = button2.read()
-                button3_state = button3.read()
+                button1_state = Config.button1.read()
+                button2_state = Config.button2.read()
+                button3_state = Config.button3.read()
 
                 if r+6 ==6:
                     if button1_state == 1:
@@ -200,9 +181,9 @@ def start():
             timer1 = time.time()
             timer2 = 5
             while (timer2 - timer1) <= 1:
-                button1_state = button1.read()
-                button2_state = button2.read()
-                button3_state = button3.read()
+                button1_state = Config.button1.read()
+                button2_state = Config.button2.read()
+                button3_state = Config.button3.read()
                 turn(R1)
                 time.sleep(0.01)
                 turn_off()
